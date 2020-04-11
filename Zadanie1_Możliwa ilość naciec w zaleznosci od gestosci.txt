@@ -1,0 +1,54 @@
+package com.company;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+
+       int tab[] = {9, 2, 3, 3, 2, 1, 7, 2, 1, 1, 6, 1, 6, 0, 2, 4, 5, 2};
+       int mozliwych = 4;
+
+       int wynik = 0;
+       int x = 0;
+       int odlegloscNaciecia1 = 0;
+       int odlegloscNaciecia2 = 0;
+
+        System.out.println("\n" + "Naciecia sa mo¿liwe na pozycjach w tabeli: ");
+       for ( int i = 1 ; i < tab.length - 1; i++)                           //znajdowanie pierwszych dwoch liczb zeby miec roznice
+       {
+            if (tab[i-1] < tab[i] & tab[i] > tab[i+1])
+            {
+                if( odlegloscNaciecia1 == 0 ) {
+                    odlegloscNaciecia1 = i;
+                    System.out.print(i + ", ");
+                    wynik++;
+                }
+                else
+                {
+                    odlegloscNaciecia2 = i;
+                    System.out.print(i + ", ");
+                    wynik++;
+                    odlegloscNaciecia2 = i;
+                    i = tab.length;
+                }
+            }
+            if (wynik == mozliwych)
+                i = tab.length;
+       }
+            x = odlegloscNaciecia2;
+           int roznica = odlegloscNaciecia2 - odlegloscNaciecia1;                                                                // znajdowanie pozostalych liczb
+        for ( int i = odlegloscNaciecia2+1 ; i < tab.length - 1; i++)
+        {
+            if (tab[i-1] < tab[i] & tab[i] > tab[i+1] & roznica <= i - odlegloscNaciecia2)
+            {
+                roznica = i - odlegloscNaciecia2;
+                odlegloscNaciecia2 = i;
+                System.out.print(i + ", ");
+                wynik++;
+            }
+            if (wynik == mozliwych)
+                i = tab.length;
+        }
+            System.out.println("\n"+ "Mo¿liwa iloœæ naciec: " + wynik);
+    }}
+
